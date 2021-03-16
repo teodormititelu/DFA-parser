@@ -1,4 +1,3 @@
-
 Words = []
 States = []
 Transitions = {}
@@ -6,23 +5,26 @@ Transitions = {}
 F = []
 S = -1
 
-def Language_parser():
 
+def DFA_parser():
     global S
     sigma = False
     states = False
     transitions = False
 
-    f = open( "Language.txt", 'r' )
+    f = open("DFA.txt", 'r')
 
-    for nr, line in enumerate( f.read().split('\n'), start = 1 ):
+    for nr, line in enumerate(f.read().split('\n'), start=1):
 
         line = line.strip()
+
+        if len(line) == 0:
+            continue
 
         if line[0] == '#':
             continue
 
-        line = line.replace(',',' ').replace(':', ' ').split()
+        line = line.replace(',', ' ').replace(':', ' ').split()
 
         if '#' in line:
             line = line[:line.index('#')]
@@ -32,20 +34,20 @@ def Language_parser():
             continue
 
         if sigma == True:
-            Words.append( line[0] )
+            Words.append(line[0])
             continue
 
         if states == True:
-            States.append( line[0] )
+            States.append(line[0])
 
-            if len( line ) == 2:
+            if len(line) == 2:
 
                 if line[1] == 'F':
-                    F.append( len( States ) - 1 )
+                    F.append( States[ len(States) - 1 ] )
 
                 if line[1] == 'S':
                     if S == -1:
-                        S = len( States ) - 1
+                        S = States[ len(States) - 1 ]
                     else:
                         print("Input invalid: Mai multe stari initiale; linia", nr)
                         f.close()
@@ -59,7 +61,7 @@ def Language_parser():
         if transitions == True:
 
             if len(line) != 3:
-                print( "Input invalid; linia", nr)
+                print("Input invalid; linia", nr)
                 f.close()
                 return
 
@@ -68,7 +70,7 @@ def Language_parser():
             state2 = line[2]
 
             if state1 not in States:
-                print( "Input invalid: Nu exista starea", state1, "; linia", nr )
+                print("Input invalid: Nu exista starea", state1, "; linia", nr)
                 f.close()
                 return
             if state2 not in States:
@@ -76,11 +78,11 @@ def Language_parser():
                 f.close()
                 return
             if word not in Words:
-                print( "Input invalid", word, "; linia", nr )
+                print("Input invalid", word, "; linia", nr)
                 f.close()
                 return
 
-            Transitions[ ( state1, word ) ] = state2
+            Transitions[(state1, word)] = state2
             continue
 
         if line[0] == "Sigma":
@@ -93,17 +95,17 @@ def Language_parser():
             transitions = True
             continue
 
-        print( "Input invalid; linia", nr )
+        print("Input invalid; linia", nr)
         f.close()
         return
 
-
     f.close()
 
-Language_parser()
 
-print( Words )
-print( States )
-print( Transitions )
-print( S )
-print( F )
+DFA_parser()
+
+print(Words)
+print(States)
+print(Transitions)
+print(S)
+print(F)
