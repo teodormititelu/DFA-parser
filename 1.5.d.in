@@ -1,0 +1,20 @@
+Sigma:
+    a
+    b
+End
+States:
+    S, S
+    A
+    B
+    B+, F
+End
+Transitions:
+   S, a, A
+   S, b, B
+   A, a, A
+   A, b, B
+   B, a, B+
+   B, b, B
+   B+, a, B+
+   B+, b, B+
+End
