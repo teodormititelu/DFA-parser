@@ -1,4 +1,4 @@
-Words = []
+Sigma = []
 States = []
 Transitions = {}
 
@@ -34,7 +34,7 @@ def DFA_parser():
             continue
 
         if sigma == True:
-            Words.append(line[0])
+            Sigma.append(line[0])
             continue
 
         if states == True:
@@ -77,7 +77,7 @@ def DFA_parser():
                 print("Input invalid: Nu exista starea", state2, "; linia", nr)
                 f.close()
                 return
-            if word not in Words:
+            if word not in Sigma:
                 print("Input invalid", word, "; linia", nr)
                 f.close()
                 return
@@ -104,7 +104,7 @@ def DFA_parser():
 
 DFA_parser()
 
-print(Words)
+print(Sigma)
 print(States)
 print(Transitions)
 print(S)
