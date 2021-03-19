@@ -12,7 +12,7 @@ def DFA_parser():
     states = False
     transitions = False
 
-    f = open( DFA.txt, 'r')
+    f = open("DFA.txt", 'r')
 
     for nr, line in enumerate(f.read().split('\n'), start=1):
 
@@ -108,3 +108,12 @@ def DFA_parser():
         return
 
     f.close()
+
+    
+DFA_parser()
+
+print(Sigma)
+print(States)
+print(Transitions)
+print(S)
+print(F)
