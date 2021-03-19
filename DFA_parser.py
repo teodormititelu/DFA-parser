@@ -40,7 +40,7 @@ def DFA_parser():
         if states == True:
             States.append(line[0])
 
-            if len(line) == 2:
+            if len(line) >= 2:
 
                 if line[1] == 'F':
                     F.append( States[ len(States) - 1 ] )
@@ -52,6 +52,14 @@ def DFA_parser():
                         print("Input invalid: Mai multe stari initiale; linia", nr)
                         f.close()
                         return;
+                    if len(line) ==3:
+                        if line[2] == 'F':
+                            F.append(States[len(States) - 1])
+                        else:
+                            print("Input invalid: Stare neidentificata; linia", nr)
+                            f.close()
+                            return;
+
                 if line[1] != 'F' and line[1] != 'S':
                     print("Input invalid: Stare neidentificata; linia", nr)
                     f.close()
