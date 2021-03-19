@@ -40,7 +40,7 @@ def DFA_parser( config_file ):
         if states == True:
             States.append(line[0])
 
-            if len(line) == 2:
+            if len(line) >= 2:
 
                 if line[1] == 'F':
                     F.append( States[ len(States) - 1 ] )
@@ -52,6 +52,14 @@ def DFA_parser( config_file ):
                         print("Input invalid: Mai multe stari initiale; linia", nr)
                         f.close()
                         return;
+                    if len(line) ==3:
+                        if line[2] == 'F':
+                            F.append(States[len(States) - 1])
+                        else:
+                            print("Input invalid: Stare neidentificata; linia", nr)
+                            f.close()
+                            return;
+
                 if line[1] != 'F' and line[1] != 'S':
                     print("Input invalid: Stare neidentificata; linia", nr)
                     f.close()
@@ -106,7 +114,10 @@ import sys
 def Check_string( input ):
 
     config_file = input[0]
-    word = input[1]
+
+    if( len(input) > 1 ):
+        word = input[1]
+    else: word = []
 
     DFA_parser( config_file )
 
