@@ -12,7 +12,7 @@ def DFA_parser():
     states = False
     transitions = False
 
-    f = open( config_file, 'r')
+    f = open( DFA.txt, 'r')
 
     for nr, line in enumerate(f.read().split('\n'), start=1):
 
