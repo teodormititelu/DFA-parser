@@ -12,7 +12,7 @@ def DFA_parser():
     states = False
     transitions = False
 
-    f = open("DFA.txt", 'r')
+    f = open( config_file, 'r')
 
     for nr, line in enumerate(f.read().split('\n'), start=1):
 
@@ -40,7 +40,7 @@ def DFA_parser():
         if states == True:
             States.append(line[0])
 
-            if len(line) == 2:
+            if len(line) >= 2:
 
                 if line[1] == 'F':
                     F.append( States[ len(States) - 1 ] )
@@ -52,6 +52,14 @@ def DFA_parser():
                         print("Input invalid: Mai multe stari initiale; linia", nr)
                         f.close()
                         return;
+                    if len(line) ==3:
+                        if line[2] == 'F':
+                            F.append(States[len(States) - 1])
+                        else:
+                            print("Input invalid: Stare neidentificata; linia", nr)
+                            f.close()
+                            return;
+
                 if line[1] != 'F' and line[1] != 'S':
                     print("Input invalid: Stare neidentificata; linia", nr)
                     f.close()
@@ -100,12 +108,3 @@ def DFA_parser():
         return
 
     f.close()
-
-
-DFA_parser()
-
-print(Sigma)
-print(States)
-print(Transitions)
-print(S)
-print(F)
