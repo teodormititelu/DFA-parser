@@ -109,7 +109,7 @@ def DFA_parser():
 
     f.close()
 
-    
+
 DFA_parser()
 
 print(Sigma)
